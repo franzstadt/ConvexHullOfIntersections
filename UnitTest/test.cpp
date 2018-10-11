@@ -21,11 +21,6 @@ using std::string;
 using std::stringstream;
 using std::stack;
 
-inline double round_4_decimal(double f)
-{
-	return round(f * 10000.0) / 10000.0;
-}
-
 std::vector<Point> test_points;
 
 class PolygonTestClass : public ::testing::Test, public Polygon

@@ -1,5 +1,5 @@
 #include "Point.h"
-#include <math.h>
+#include <cmath>
 #include "Constants.h"
 
 namespace ConvexHull
@@ -9,9 +9,9 @@ namespace ConvexHull
 		return sqrt(((x - p2.x)*(x - p2.x)) + ((y - p2.y)*(y - p2.y)));
 	}
 
-	bool Point::Equals(double a, double b, double epsilon)
+	bool Point::Equals(double a, double b)
 	{
-		return std::abs(a - b) < epsilon;
+		return std::fabs(a - b) < kEpsilon;
 	}
 
 	bool Point::operator==(const Point& rhs) const

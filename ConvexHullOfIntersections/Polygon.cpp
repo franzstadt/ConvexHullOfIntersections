@@ -78,7 +78,7 @@ namespace ConvexHull
 	double Polygon::GetConvexHullArea(const std::vector<Point>& hull) const
 	{
 		double area = 0.0;
-		int j = hull.size() - 1;
+		size_t j = hull.size() - 1;
 
 		for (unsigned i = 0; i < hull.size(); i++)
 		{

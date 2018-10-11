@@ -9,7 +9,7 @@ namespace ConvexHull
 
 		Point(double px = 0.0, double py = 0.0) : x(px), y(py) {}
 		double distance(const Point& p2)  const;
-		static bool Equals(double a, double b, double epsilon = 0.0001);
+		static bool Equals(double a, double b);
 		bool operator==(const Point& rhs) const;
 	};
 }

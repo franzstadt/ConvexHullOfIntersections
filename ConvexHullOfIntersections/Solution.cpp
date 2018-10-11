@@ -3,6 +3,7 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
+#include "Helper.h"
 
 namespace ConvexHull
 {
@@ -250,8 +251,5 @@ namespace ConvexHull
 		expected_input.close();
 	}
 
-	inline double Solution::round_4_decimal(double f) const
-	{
-		return std::round(f * 10000.0) / 10000.0;
-	}
+	
 }

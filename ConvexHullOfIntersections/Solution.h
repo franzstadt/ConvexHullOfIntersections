@@ -27,7 +27,6 @@ namespace ConvexHull
 		std::stack<Point> convex_hull_points;
 		std::vector<Point> not_found_convex;
 		std::vector<Point> area;
-		inline double round_4_decimal(double f) const;
 		void CheckIntersectionPoints();
 		void CheckConvexHullPoints();
 		void ReadFromCin();
