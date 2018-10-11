@@ -9,6 +9,7 @@ int main()
 	// - the 2nd and 3rd parameter is created for modultest to check the expected values (see below)
 	//Solution s("input.txt", "expected_intersection_points.txt", "expected_convex_hull_points.txt");
 
+
 	try
 	{
 		ConvexHull::Solution s("input0.txt");
