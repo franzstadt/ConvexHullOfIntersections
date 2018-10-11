@@ -240,7 +240,7 @@ namespace ConvexHull
 		convex_hull_points = p.GetConvexHull();
 		std::cout << convex_hull_points.size() << std::endl;
 		CheckConvexHullPoints();
-		std::cout << std::setprecision(7) << p.GetConvexHullArea(area) << std::endl;
+		std::cout << std::setprecision(9) << round_4_decimal(p.GetConvexHullArea(area)) << std::endl;
 	}
 
 	Solution::~Solution()
@@ -252,6 +252,6 @@ namespace ConvexHull
 
 	inline double Solution::round_4_decimal(double f) const
 	{
-		return std::round(f * 10000) / 10000;
+		return std::round(f * 10000.0) / 10000.0;
 	}
 }

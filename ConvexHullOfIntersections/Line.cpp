@@ -19,12 +19,13 @@ namespace ConvexHull
 		double m2 = dy / dx;
 		double c2 = l2.p1.y - m2 * l2.p1.x;
 
-		if (Point::Equals((m1 - m2),0))
+		if (Point::Equals((m1 - m2),0.0))
 			return false;
 		else
 		{
-			intersection.x = (c2 - c1) / (m1 - m2);
-			intersection.y = m1 * intersection.x + c1;
+			intersection.x = round((c2 - c1) / (m1 - m2)*10000.0) / 10000.0;
+			intersection.y = round((m1 * intersection.x + c1)*10000.0) / 10000.0;
+
 			if (OnLine(intersection) && l2.OnLine(intersection))
 				return true;
 			else

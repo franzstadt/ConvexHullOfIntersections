@@ -38,14 +38,20 @@ namespace ConvexHull
 		} points_compare;
 		std::vector<Point> m_points;
 
-		Point Get2ndTop(std::stack<Point> &s) const;
-
-		int GetLowest_y_Index(const std::vector<Point>& p) const;
+		
 		std::deque<Point> RemoveDuplicatedAngle(const Point& min) const;
 
 	public:
 		Polygon(const std::vector<Point>& p) : m_points(p) {}
 		std::stack<Point> GetConvexHull();
 		double GetConvexHullArea(const std::vector<Point>& hull) const;
+	protected:
+		void SetPoints(const std::vector<Point>& points)
+		{
+			m_points = points;
+		}
+
+		Point Get2ndTop(std::stack<Point> &s) const;
+		int GetLowest_y_Index(const std::vector<Point>& p) const;
 	};
 }

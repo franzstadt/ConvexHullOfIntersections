@@ -58,5 +58,11 @@
     <Text Include="input0.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="expected_intersection_points0.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="expected_convex_hull_points0.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

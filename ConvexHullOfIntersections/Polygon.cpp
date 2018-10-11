@@ -58,7 +58,8 @@ namespace ConvexHull
 		points_without_duplicated_angle.push_front(m_points[0]);
 
 
-		if (points_without_duplicated_angle.size() < 3) return convex_points;
+		if (points_without_duplicated_angle.size() < 3) 
+			return convex_points;
 
 		convex_points.push(points_without_duplicated_angle[0]);
 		convex_points.push(points_without_duplicated_angle[1]);
