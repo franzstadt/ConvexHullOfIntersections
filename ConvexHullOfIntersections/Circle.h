@@ -13,8 +13,8 @@ namespace ConvexHull
 	public:
 		Circle(double x, double y, double r) : center(x, y), r(r) {}
 		std::vector<Point> GetCircleCircleIntersectionPoints(const Circle& c) const;
+		std::vector<Point> GetCircleCircleIntersectionPoints2(const Circle& c) const;
 		std::vector<Point> GetCircleLineIntersectionPoints(const Line& l) const;
-		std::vector<Point> GetCircleLineIntersectionPoints2(const Line& l) const;
 		bool operator==(const Circle& rhs) const;
 	};
 }

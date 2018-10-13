@@ -40,6 +40,30 @@ namespace ConvexHull
 		return intersection_points;
 	}
 
+	std::vector<Point> Circle::GetCircleCircleIntersectionPoints2(const Circle& c) const
+	{
+		std::vector<Point> intersection_points;
+		
+		//x'=[(x-u)*cos(alfa)-(y-v)*sin(Alfa)]+u
+		//y'=[(x-u)*sin(alfa)-(y-v)*cos(Alfa)]+v
+		double d = center.distance(c.center);
+
+		double R_pow_2 = pow(r, 2);
+		double r_pow_2 = pow(c.r, 2);
+		
+		double x = (pow(d, 2) - r_pow_2 + R_pow_2) / (2*d);
+		double y = sqrt(R_pow_2 - pow(x, 2));
+
+		
+		intersection_points.push_back(Point(round_4_decimal(x), round_4_decimal(y)));
+
+		if (d == abs(r - c.r) || d == (r + c.r))
+			return intersection_points;
+
+		intersection_points.push_back(Point(round_4_decimal (-x), round_4_decimal( -y)));
+		return intersection_points;
+	}
+
 
 	std::vector<Point> Circle::GetCircleLineIntersectionPoints(const Line & l) const
 	{

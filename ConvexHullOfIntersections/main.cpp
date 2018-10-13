@@ -15,14 +15,14 @@ int main()
 	// - the 2nd and 3rd parameter is created for modultest to check the expected values (see below)
 	//Solution s("input.txt", "expected_intersection_points.txt", "expected_convex_hull_points.txt");
 
-	/*
-	Line l1(Point{ 0,0 }, Point{ 10,0 });
-	Circle c(8, 2, 2);
+	
+	
+	Circle c1(0, 0, 1), c2(2.5,0,2.1);
 
 	Point intersection1,intersection2;
 	
 	auto start = std::chrono::high_resolution_clock::now();
-	std::vector<Point> intersections1 = c.GetCircleLineIntersectionPoints(l1);
+	std::vector<Point> intersections1 = c1.GetCircleCircleIntersectionPoints(c2);
 	auto finish = std::chrono::high_resolution_clock::now();
 
 	std::chrono::duration<double> elapsed = finish - start;
@@ -34,7 +34,7 @@ int main()
 	
 	
 	auto start2 = std::chrono::high_resolution_clock::now();
-	std::vector<Point> intersections2 = c.GetCircleLineIntersectionPoints2(l1);
+	std::vector<Point> intersections2 = c1.GetCircleCircleIntersectionPoints2(c2);
 	auto finish2 = std::chrono::high_resolution_clock::now();
 	
 	std::chrono::duration<double> elapsed2 = finish2 - start2;
@@ -46,8 +46,8 @@ int main()
 	
 
 	std::cout << (elapsed.count() < elapsed2.count() ? "winner1" : "winner2") << std::endl;
-	*/
 	
+	/*
 	try
 	{
 		ConvexHull::Solution s("input0.txt");
@@ -58,7 +58,7 @@ int main()
 	{
 		std::cout << e.what() << std::endl;
 	}
-	
+	*/
 	system("pause");
 	return 0;
 }
