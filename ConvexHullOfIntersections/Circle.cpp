@@ -1,6 +1,7 @@
 #include "Circle.h"
 #include "Point.h"
 #include "Line.h"
+#include "Helper.h"
 
 namespace ConvexHull
 {
@@ -39,46 +40,46 @@ namespace ConvexHull
 		return intersection_points;
 	}
 
+
 	std::vector<Point> Circle::GetCircleLineIntersectionPoints(const Line & l) const
 	{
 		std::vector<Point> intersection_points;
 
-		double dx = l.p2.x - l.p1.x;
-		double dy = l.p2.y - l.p1.y;
-		double sign = dy < 0.0 ? -1.0 : 1.0;
-		double signx = dx < 0.0 ? -1.0 : 1.0;
-		double slope = dy / dx;
-		double d = l.p1.y - (slope*l.p1.x);
-		double d2 = l.p2.y - (slope*l.p2.x);
-		double A = -(2.0 * center.x);
-		double B = -(2.0 * center.y);
-		double C = (center.x*center.x) + (center.y*center.y) - (r*r);
+		double x1 = l.p1.x - center.x;
+		double x2 = l.p2.x - center.x;
 
-		double numertor_fix_part_for_x = (2.0 * slope*d) + A + (B*slope);
-		double numertor_fix_part_for_y = (A*slope) - (2.0 * d) + (slope*slope*B);
+		double y1 = l.p1.y - center.y;
+		double y2 = l.p2.y - center.y;
 
+		double dx = x2 - x1;
+		double dy = y2 - y1;
 
-		double disc_x = (numertor_fix_part_for_x*numertor_fix_part_for_x) - (4.0 * ((1.0 + (slope*slope))*((d*d) + (B*d) + C)));
-		double disc_y = (numertor_fix_part_for_y*numertor_fix_part_for_y) - (4.0 * (1.0 + (slope*slope))*((d*d) - (A*slope*d) + (slope*slope*C)));
+		double sign_dy = dy < 0.0 ? -1.0 : 1.0;
 
-		if (disc_x < 0.0 || disc_y < 0.0)
+		double dr_pow_2 = pow(dx, 2) + pow(dy, 2);
+
+		double common_determinant = Determinant(x1, x2, y1, y2);
+
+		double discriminant = pow(r, 2)*dr_pow_2 - pow(common_determinant, 2);
+		double sqrt_disc = sqrt(discriminant);
+
+		if (discriminant < 0)
 			return intersection_points;
 
-		double denominator = 2.0*(1.0 + (slope*slope));
-
-		double x1 = (-numertor_fix_part_for_x + signx * sqrt(disc_x)) / denominator;
-		double x2 = (-numertor_fix_part_for_x - signx * sqrt(disc_x)) / denominator;
-		double y1 = (-numertor_fix_part_for_y + sign * sqrt(disc_y)) / denominator;
-		double y2 = (-numertor_fix_part_for_y - sign * sqrt(disc_y)) / denominator;
-
-		Point p1(x1, y1);
+		double intersection_x1 = (common_determinant*dy + sign_dy * dx*sqrt_disc) / dr_pow_2;
+		double intersection_y1 = (-common_determinant * dx + abs(dy) *sqrt_disc) / dr_pow_2;
+		
+		Point p1(intersection_x1 + center.x, intersection_y1 + center.y);
 		if (l.OnLine(p1))
 			intersection_points.push_back(p1);
 
-		if (disc_x == 0 || disc_y == 0)
+		if (Point::Equals(discriminant, 0.0))
 			return intersection_points;
 
-		Point p2(x2, y2);
+		double intersection_x2 = (common_determinant*dy - sign_dy * dx*sqrt_disc) / dr_pow_2;
+		double intersection_y2 = (-common_determinant * dx - abs(dy) *sqrt_disc) / dr_pow_2;
+
+		Point p2(intersection_x2 + center.x, intersection_y2 + center.y);
 		if (l.OnLine(p2))
 			intersection_points.push_back(p2);
 
