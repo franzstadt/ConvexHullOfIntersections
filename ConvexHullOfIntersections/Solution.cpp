@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include "Helper.h"
+#include <chrono>
 
 namespace ConvexHull
 {
@@ -233,10 +234,39 @@ namespace ConvexHull
 	{
 		Polygon p(points);
 
+		
+
+		std::vector<Point> P(points.begin(), points.end()),H;
+		auto start2 = std::chrono::high_resolution_clock::now();
+
+		H = p.convex_hull2(P);
+		auto finish2 = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> elapsed2 = finish2 - start2;
+		std::cout << "\ntime: " << elapsed2.count() << "\n";
+		
+		/*
+		auto start = std::chrono::high_resolution_clock::now();
 		convex_hull_points = p.GetConvexHull();
+		auto finish = std::chrono::high_resolution_clock::now();
+
+		
+		std::chrono::duration<double> elapsed = finish - start;
+
+		std::cout << "\ntime: " << elapsed.count() << "\n";
+		
+		*/
+		
+
+		
+		
+
+		//std::cout << (elapsed.count() < elapsed2.count() ? "winner1" : "winner2") << std::endl;
+
+		/*
 		std::cout << convex_hull_points.size() << std::endl;
 		CheckConvexHullPoints();
 		std::cout << std::setprecision(9) << round_4_decimal(p.GetConvexHullArea(convex_hull_points)) << std::endl;
+		*/
 	}
 
 	Solution::~Solution()
