@@ -12,6 +12,7 @@ namespace ConvexHull
 		Solution(std::string input_file_name = "", std::string check_file_inters = "", std::string check_file_convhull = "");
 		void GetIntersectionPoints();
 		void CalculateConvexHull();
+		void CalculateConvexHull2();
 		~Solution();
 	private:
 		int shapes_count;
@@ -29,6 +30,7 @@ namespace ConvexHull
 		std::vector<Point> area;
 		void CheckIntersectionPoints();
 		void CheckConvexHullPoints();
+		void CheckConvexHullPoints2(const std::vector<Point>& convex_hull);
 		void ReadFromCin();
 	};
 

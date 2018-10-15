@@ -75,6 +75,37 @@ namespace ConvexHull
 		return convex_points;
 	}
 
+	double cross(const Point &O, const Point &A, const Point &B)
+	{
+		return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
+	}
+
+	std::vector<Point> Polygon::GetConvexHull2()
+	{
+		size_t n = m_points.size(), k = 0;
+		if (n <= 3) return m_points;
+
+		std::vector<Point> convex_hull(2 * n);
+
+		// Sort points lexicographically
+		std::sort(m_points.begin(), m_points.end());
+
+		// Build lower hull
+		for (size_t i = 0; i < n; ++i) {
+			while (k >= 2 && cross(convex_hull[k - 2], convex_hull[k - 1], m_points[i]) <= 0) k--;
+			convex_hull[k++] = m_points[i];
+		}
+
+		// Build upper hull
+		for (size_t i = n - 1, t = k + 1; i > 0; --i) {
+			while (k >= t && cross(convex_hull[k - 2], convex_hull[k - 1], m_points[i - 1]) <= 0) k--;
+			convex_hull[k++] = m_points[i - 1];
+		}
+
+		convex_hull.resize(k - 1);
+		return convex_hull;
+	}
+
 	double Polygon::GetConvexHullArea(const std::vector<Point>& hull) const
 	{
 		double area = 0.0;

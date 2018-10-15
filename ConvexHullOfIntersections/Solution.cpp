@@ -193,6 +193,12 @@ namespace ConvexHull
 		}
 	}
 
+	void Solution::CheckConvexHullPoints2(const std::vector<Point>& convex_hull)
+	{
+		for (const auto& point : convex_hull)
+			std::cout << point.x << " " << point.y << std::endl;
+	}
+
 	void Solution::ReadFromCin()
 	{
 		std::cin >> shapes_count;
@@ -239,9 +245,19 @@ namespace ConvexHull
 		Polygon p(points);
 
 		convex_hull_points = p.GetConvexHull();
-		std::cout << convex_hull_points.size() << std::endl;
-		CheckConvexHullPoints();
-		std::cout << std::setprecision(9) << round_4_decimal(p.GetConvexHullArea(area)) << std::endl;
+		//std::cout << convex_hull_points.size() << std::endl;
+		//CheckConvexHullPoints();
+		//std::cout << std::setprecision(9) << round_4_decimal(p.GetConvexHullArea(area)) << std::endl;
+	}
+
+	void Solution::CalculateConvexHull2()
+	{
+		Polygon p(points);
+
+		std::vector<Point> convex_hull = p.GetConvexHull2();
+		//std::cout << std::endl<<convex_hull.size() << std::endl;
+		//CheckConvexHullPoints2(convex_hull);
+		//std::cout << std::setprecision(9) << round_4_decimal(p.GetConvexHullArea(convex_hull)) << std::endl;
 	}
 
 	Solution::~Solution()

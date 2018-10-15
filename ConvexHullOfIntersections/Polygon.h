@@ -44,6 +44,7 @@ namespace ConvexHull
 	public:
 		Polygon(const std::vector<Point>& p) : m_points(p) {}
 		std::stack<Point> GetConvexHull();
+		std::vector<Point> GetConvexHull2();
 		double GetConvexHullArea(const std::vector<Point>& hull) const;
 	protected:
 		void SetPoints(const std::vector<Point>& points)

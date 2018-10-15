@@ -11,5 +11,9 @@ namespace ConvexHull
 		double distance(const Point& p2)  const;
 		static bool Equals(double a, double b);
 		bool operator==(const Point& rhs) const;
+		bool operator <(const Point &p) const 
+		{
+			return x < p.x || (Equals(x, p.x) && y < p.y);
+		}
 	};
 }
