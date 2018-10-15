@@ -52,20 +52,7 @@ int main()
 	{
 		ConvexHull::Solution s("input0.txt");
 		s.GetIntersectionPoints();
-		auto start = std::chrono::high_resolution_clock::now();
 		s.CalculateConvexHull();
-		auto finish = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double> elapsed = finish - start;
-		std::cout << "\n Graham scan time: " << elapsed.count() << "\n";
-
-		auto start2 = std::chrono::high_resolution_clock::now();
-		s.CalculateConvexHull2();
-		auto finish2 = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double> elapsed2 = finish2 - start2;
-		std::cout << "\n Monotone chain time: " << elapsed2.count() << "\n";
-
-		//std::cout << (elapsed.count() < elapsed2.count() ? "winner1" : "winner2") << std::endl;
-
 	}
 	catch (const std::exception& e)
 	{

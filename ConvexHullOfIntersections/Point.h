@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdlib>
+#include <string>
 
 namespace ConvexHull
 {
@@ -14,6 +15,19 @@ namespace ConvexHull
 		bool operator <(const Point &p) const 
 		{
 			return x < p.x || (Equals(x, p.x) && y < p.y);
+		}
+	};
+}
+
+namespace std
+{
+	template<>
+	struct hash<ConvexHull::Point>
+	{
+		size_t
+			operator()(const ConvexHull::Point & obj) const
+		{
+			return hash<string>()(to_string(obj.x)+"_"+to_string(obj.y));
 		}
 	};
 }

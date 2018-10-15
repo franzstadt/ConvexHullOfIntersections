@@ -23,48 +23,7 @@ using std::stack;
 
 std::vector<Point> test_points;
 
-class PolygonTestClass : public ::testing::Test, public Polygon
-{
-public:
-	PolygonTestClass() : Polygon(test_points) {}
-	void SetUp(const vector<Point>& p)
-	{
-		SetPoints(p);
-	}
-	std::stack<Point> S;
-};
-
-TEST_F(PolygonTestClass, get2ndtopTest)
-{
-	Point p1(0, 1);
-	S.push(p1);
-
-	EXPECT_THROW(Get2ndTop(S), runtime_error);
-}
-TEST_F(PolygonTestClass, GetLowest_y_Index_DeathTest)
-{
-	Point p1(0, 1), p2(9, -4), p3(6, 3);
-	vector<Point> test_v;
-	test_v.push_back(p1);
-	test_v.push_back(p2);
-	test_v.push_back(p3);
-
-	EXPECT_THROW(GetLowest_y_Index(test_v), runtime_error);
-}
-TEST_F(PolygonTestClass, get_lowest_y_indexTest)
-{
-	Point p1(0, 1), p2(9, -4), p3(6, 3);
-	vector<Point> test_v;
-	test_v.push_back(p1);
-	test_v.push_back(p2);
-	test_v.push_back(p3);
-	SetUp(test_v);
-
-	int i = GetLowest_y_Index(test_v);
-	Point p4 = test_v[i];
-	EXPECT_DOUBLE_EQ(p4.x, 9.0);
-	EXPECT_DOUBLE_EQ(p4.y, -4.0);
-}
+/*
 TEST(PolygonTest, GetConvexHullTest)
 {
 	int shapes_count;
@@ -181,13 +140,12 @@ TEST(PolygonTest, GetConvexHullTest)
 
 	Polygon p(points);
 
-	stack<Point> convex_hull_points = p.GetConvexHull();
+	vector<Point> convex_hull_points = p.GetConvexHull();
 	EXPECT_EQ(convex_hull_points.size(), 9);
 	vector<Point> not_found_convex;
 	vector<Point> area;
-	while (!convex_hull_points.empty())
+	for(const auto& i:convex_hull_points)
 	{
-		Point i = convex_hull_points.top();
 		Point tmp(round_4_decimal(i.x), round_4_decimal(i.y));
 		auto it = find(expected_convex_points.begin(), expected_convex_points.end(), tmp);
 		if (it != expected_convex_points.end())
@@ -197,12 +155,11 @@ TEST(PolygonTest, GetConvexHullTest)
 		}
 		else
 			not_found_convex.push_back(tmp);
-		convex_hull_points.pop();
 	}
 	EXPECT_EQ(expected_points.size(), 0);
 	EXPECT_EQ(not_found.size(), 0);
 	EXPECT_DOUBLE_EQ(round_4_decimal(p.GetConvexHullArea(area)), 140.0774);
-}
+}*/
 TEST(PointTest, DistanceTest)
 {
 	Point p1(12, 5), p2(12, 5);

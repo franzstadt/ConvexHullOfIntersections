@@ -94,7 +94,7 @@ namespace ConvexHull
 				double x, y;
 				linestream >> x >> y;
 				Point p(x, y);
-				expected_convex_points.push_back(p);
+				expected_convex_points.insert(p);
 			}
 		}
 	}
@@ -108,7 +108,7 @@ namespace ConvexHull
 				{
 					Point new_point(0, 0);
 					if (lines[i].GetLineLineIntersectionPoints(lines[j], new_point))
-						points.push_back(new_point);
+						points.insert(new_point);
 				}
 		}
 		for (unsigned i = 0; i < circles.size(); i++)
@@ -117,14 +117,14 @@ namespace ConvexHull
 				for (unsigned j = i + 1; j < circles.size(); j++)
 				{
 					std::vector<Point> new_points = circles[i].GetCircleCircleIntersectionPoints(circles[j]);
-					points.insert(points.end(), new_points.begin(), new_points.end());
+					points.insert(new_points.begin(), new_points.end());
 				}
 		}
 		for (auto circle : circles)
 			for (auto line : lines)
 			{
 				std::vector<Point> new_points = circle.GetCircleLineIntersectionPoints(line);
-				points.insert(points.end(), new_points.begin(), new_points.end());
+				points.insert(new_points.begin(), new_points.end());
 			}
 		std::cout << points.size() << std::endl;
 		CheckIntersectionPoints();
@@ -158,29 +158,24 @@ namespace ConvexHull
 		}
 	}
 
-	void Solution::CheckConvexHullPoints() 
+	void Solution::CheckConvexHullPoints()
 	{
-		while (!convex_hull_points.empty())
+		for(const auto& point: convex_hull_points)
 		{
-			Point i = convex_hull_points.top();
-			Point tmp(round_4_decimal(i.x), round_4_decimal(i.y));
-			std::cout << tmp.x << " " << tmp.y << std::endl;
+			std::cout << point.second.x << " " << point.second.y << std::endl;
 
 			if (!expected_convex_points.empty())
 			{
-				auto it = find(expected_convex_points.begin(), expected_convex_points.end(), tmp);
+				auto it = find(expected_convex_points.begin(), expected_convex_points.end(), point.second);
 				if (it != expected_convex_points.end())
 				{
-					area.push_back(tmp);
 					expected_convex_points.erase(it);
 				}
 				else
-					not_found_convex.push_back(tmp);
+				{
+					not_found_convex.push_back(point.second);
+				}
 			}
-			else
-				area.push_back(tmp);
-
-			convex_hull_points.pop();
 		}
 		if ((!expected_convex_points.empty() || !not_found_convex.empty()) && !convex_hull_points.empty())
 		{
@@ -191,12 +186,6 @@ namespace ConvexHull
 			for (auto i : not_found_convex)
 				std::cout << std::setprecision(5) << i.x << " " << i.y << std::endl;
 		}
-	}
-
-	void Solution::CheckConvexHullPoints2(const std::vector<Point>& convex_hull)
-	{
-		for (const auto& point : convex_hull)
-			std::cout << point.x << " " << point.y << std::endl;
 	}
 
 	void Solution::ReadFromCin()
@@ -245,19 +234,9 @@ namespace ConvexHull
 		Polygon p(points);
 
 		convex_hull_points = p.GetConvexHull();
-		//std::cout << convex_hull_points.size() << std::endl;
-		//CheckConvexHullPoints();
-		//std::cout << std::setprecision(9) << round_4_decimal(p.GetConvexHullArea(area)) << std::endl;
-	}
-
-	void Solution::CalculateConvexHull2()
-	{
-		Polygon p(points);
-
-		std::vector<Point> convex_hull = p.GetConvexHull2();
-		//std::cout << std::endl<<convex_hull.size() << std::endl;
-		//CheckConvexHullPoints2(convex_hull);
-		//std::cout << std::setprecision(9) << round_4_decimal(p.GetConvexHullArea(convex_hull)) << std::endl;
+		std::cout << convex_hull_points.size() << std::endl;
+		CheckConvexHullPoints();
+		std::cout << std::setprecision(9) << round_4_decimal(p.GetConvexHullArea(convex_hull_points)) << std::endl;
 	}
 
 	Solution::~Solution()
