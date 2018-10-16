@@ -95,7 +95,7 @@ namespace ConvexHull
 				double x, y;
 				linestream >> x >> y;
 				Point p(x, y);
-				expected_convex_points.insert(p);
+				expected_convex_points.push_back(p);
 			}
 		}
 	}
@@ -109,7 +109,7 @@ namespace ConvexHull
 				{
 					Point new_point(0, 0);
 					if (lines[i].GetLineLineIntersectionPoints(lines[j], new_point))
-						points.insert(new_point);
+						points.push_back(new_point);
 				}
 		}
 		for (unsigned i = 0; i < circles.size(); i++)
@@ -118,14 +118,14 @@ namespace ConvexHull
 				for (unsigned j = i + 1; j < circles.size(); j++)
 				{
 					std::vector<Point> new_points = circles[i].GetCircleCircleIntersectionPoints(circles[j]);
-					points.insert(new_points.begin(), new_points.end());
+					points.insert(points.end(),new_points.begin(), new_points.end());
 				}
 		}
 		for (auto circle : circles)
 			for (auto line : lines)
 			{
 				std::vector<Point> new_points = circle.GetCircleLineIntersectionPoints(line);
-				points.insert(new_points.begin(), new_points.end());
+				points.insert(points.end(),new_points.begin(), new_points.end());
 			}
 		std::cout << points.size() << std::endl;
 		CheckIntersectionPoints();
@@ -163,18 +163,18 @@ namespace ConvexHull
 	{
 		for(const auto& point: convex_hull_points)
 		{
-			std::cout << point.second.x << " " << point.second.y << std::endl;
+			std::cout << point.x << " " << point.y << std::endl;
 
 			if (!expected_convex_points.empty())
 			{
-				auto it = find(expected_convex_points.begin(), expected_convex_points.end(), point.second);
+				auto it = find(expected_convex_points.begin(), expected_convex_points.end(), point);
 				if (it != expected_convex_points.end())
 				{
 					expected_convex_points.erase(it);
 				}
 				else
 				{
-					not_found_convex.push_back(point.second);
+					not_found_convex.push_back(point);
 				}
 			}
 		}
@@ -234,39 +234,10 @@ namespace ConvexHull
 	{
 		Polygon p(points);
 
-		
-
-		std::vector<Point> P(points.begin(), points.end()),H;
-		auto start2 = std::chrono::high_resolution_clock::now();
-
-		H = p.convex_hull2(P);
-		auto finish2 = std::chrono::high_resolution_clock::now();
-		std::chrono::duration<double> elapsed2 = finish2 - start2;
-		std::cout << "\ntime: " << elapsed2.count() << "\n";
-		
-		/*
-		auto start = std::chrono::high_resolution_clock::now();
 		convex_hull_points = p.GetConvexHull();
-		auto finish = std::chrono::high_resolution_clock::now();
-
-		
-		std::chrono::duration<double> elapsed = finish - start;
-
-		std::cout << "\ntime: " << elapsed.count() << "\n";
-		
-		*/
-		
-
-		
-		
-
-		//std::cout << (elapsed.count() < elapsed2.count() ? "winner1" : "winner2") << std::endl;
-
-		/*
 		std::cout << convex_hull_points.size() << std::endl;
 		CheckConvexHullPoints();
 		std::cout << std::setprecision(9) << round_4_decimal(p.GetConvexHullArea(convex_hull_points)) << std::endl;
-		*/
 	}
 
 	Solution::~Solution()

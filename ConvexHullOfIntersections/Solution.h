@@ -20,14 +20,14 @@ namespace ConvexHull
 		int shapes_count;
 		std::vector<Circle> circles;
 		std::vector<Line> lines;
-		std::set<Point> points;
+		std::vector<Point> points;
 		std::vector<Point> expected_points;
-		std::unordered_set<Point> expected_convex_points;
+		std::vector<Point> expected_convex_points;
 		std::ifstream input;
 		std::ifstream expected_input;
 		std::ifstream expected_hull_input;
 		std::string sline;
-		std::unordered_map<int,Point> convex_hull_points;
+		std::vector<Point> convex_hull_points;
 		std::vector<Point> not_found_convex;
 		std::vector<Point> area;
 		void CheckIntersectionPoints();

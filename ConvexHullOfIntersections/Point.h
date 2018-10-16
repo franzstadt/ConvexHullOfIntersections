@@ -12,22 +12,9 @@ namespace ConvexHull
 		double distance(const Point& p2)  const;
 		static bool Equals(double a, double b);
 		bool operator==(const Point& rhs) const;
-		bool operator <(const Point &p) const 
+		bool operator <(const Point& rhs) const 
 		{
-			return x < p.x || (Equals(x, p.x) && y < p.y);
-		}
-	};
-}
-
-namespace std
-{
-	template<>
-	struct hash<ConvexHull::Point>
-	{
-		size_t
-			operator()(const ConvexHull::Point & obj) const
-		{
-			return hash<string>()(to_string(obj.x)+"_"+to_string(obj.y));
+			return x < rhs.x || (Equals(x, rhs.x) && y < rhs.y);
 		}
 	};
 }

@@ -3,23 +3,19 @@
 #include "Constants.h"
 #include <vector>
 #include <algorithm>
-#include <set>
-#include <unordered_map>
-#include <unordered_set>
 
 namespace ConvexHull
 {
 	class Polygon
 	{
 	private:
-		std::set<Point> m_points;
+		std::vector<Point> m_points;
 		
-		double Cross(const Point &O, const Point &A, const Point &B);
+		double Cross(const Point &O, const Point &A, const Point &B) const;
 
 	public:
-		std::vector<Point> convex_hull2(std::vector<Point> P);
-		Polygon(const std::set<Point>& p) : m_points(p) {}
-		std::unordered_map<int, Point> GetConvexHull();
-		double GetConvexHullArea(const std::unordered_map<int, Point>& hull) const;
+		Polygon(const std::vector<Point>& p) : m_points(p) {}
+		std::vector<Point> GetConvexHull();
+		double GetConvexHullArea(const std::vector<Point>& hull) const;
 	};
 }
