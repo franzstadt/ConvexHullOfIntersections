@@ -164,7 +164,9 @@ namespace ConvexHull
 			ReadStream(input);
 		}
 		else
+		{
 			ReadStream(std::cin);
+		}
 		
 	}
 }
