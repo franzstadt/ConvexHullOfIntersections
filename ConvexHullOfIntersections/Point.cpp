@@ -1,23 +1,24 @@
 #include "Point.h"
 #include <cmath>
 #include "Constants.h"
+#include "Helper.h"
 
 namespace ConvexHull
 {
 	double Point::distance(const Point& p2)  const
 	{
-		return sqrt(((x - p2.x)*(x - p2.x)) + ((y - p2.y)*(y - p2.y)));
-	}
+		double dx = x - p2.x;
+		double dy = y - p2.y;
 
-	bool Point::Equals(double a, double b)
-	{
-		return std::fabs(a - b) < kEpsilon;
+		return std::sqrt(dx * dx + dy * dy);
 	}
 
 	bool Point::operator==(const Point& rhs) const
 	{
 		return Equals(x, rhs.x) && Equals(y, rhs.y);
 	}
+
+	//Compare Points lexicographically
 	bool Point::operator<(const Point & rhs) const
 	{
 		return x < rhs.x || (Equals(x, rhs.x) && y < rhs.y);

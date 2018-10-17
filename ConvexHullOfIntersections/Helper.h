@@ -1,5 +1,9 @@
 #pragma once
+#include "Constants.h"
+
+#include <limits>
 #include <cmath>
+
 
 namespace ConvexHull
 {
@@ -11,5 +15,10 @@ namespace ConvexHull
 	inline double Determinant(double a, double b, double c, double d) 
 	{
 		return a * d - b * c;
+	}
+
+	inline bool Equals(double a, double b)
+	{
+		return std::abs(a - b) <= std::numeric_limits<double>::epsilon() * std::abs(a + b) * kEpsilon || std::abs(a - b) < std::numeric_limits<double>::min();
 	}
  }

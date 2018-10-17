@@ -1,18 +1,17 @@
-#include "Polygon.h"
-#include <iterator>
-#include <unordered_map>
+#include "PointCloud.h"
+
+#include <algorithm>
 
 namespace ConvexHull
 {
-	double Polygon::Cross(const Point &O, const Point &A, const Point &B) const
+	double PointCloud::Cross(const Point &x, const Point &a, const Point &b) const
 	{
-		return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
+		return (a.x - x.x) * (b.y - x.y) - (a.y - x.y) * (b.x - x.x);
 	}
 
-	std::vector<Point> Polygon::GetConvexHull()
+	std::vector<Point> PointCloud::GetConvexHull()
 	{
-		size_t n = m_points.size(),
-			   k = 0;
+		size_t n = m_points.size(), k = 0;
 
 		if (n <= 3) 
 			return m_points;
@@ -43,12 +42,12 @@ namespace ConvexHull
 		return convex_hull;
 	}
 
-	double Polygon::GetConvexHullArea(const std::vector<Point>& convex_hull) const
+	double PointCloud::GetConvexHullArea(const std::vector<Point>& convex_hull) const
 	{
 		double area = 0.0;
 		size_t j = convex_hull.size() - 1;
 
-		for (unsigned i = 0; i < convex_hull.size(); i++)
+		for (size_t i = 0; i < convex_hull.size(); ++i)
 		{
 			area += (convex_hull[j].x + convex_hull[i].x) * (convex_hull[j].y - convex_hull[i].y);
 			j = i;

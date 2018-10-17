@@ -119,7 +119,7 @@
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Point.cpp" />
-    <ClCompile Include="Polygon.cpp" />
+    <ClCompile Include="PointCloud.cpp" />
     <ClCompile Include="Solution.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -128,7 +128,7 @@
     <ClInclude Include="Helper.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="Point.h" />
-    <ClInclude Include="Polygon.h" />
+    <ClInclude Include="PointCloud.h" />
     <ClInclude Include="Solution.h" />
   </ItemGroup>
   <ItemGroup>

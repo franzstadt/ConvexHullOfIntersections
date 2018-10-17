@@ -1,7 +1,7 @@
 #pragma once
-
 #include "Point.h"
 #include "Line.h"
+
 #include <vector>
 
 namespace ConvexHull

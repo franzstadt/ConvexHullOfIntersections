@@ -73,7 +73,7 @@ namespace ConvexHull
 		if (l.OnLine(p1))
 			intersection_points.push_back(p1);
 
-		if (Point::Equals(discriminant, 0.0))
+		if (Equals(discriminant, 0.0))
 			return intersection_points;
 
 		double intersection_x2 = (common_determinant*dy - sign_dy * dx*sqrt_disc) / dr_pow_2;
@@ -88,6 +88,6 @@ namespace ConvexHull
 
 	bool Circle::operator==(const Circle& rhs) const
 	{
-		return center == rhs.center && Point::Equals(r ,rhs.r);
+		return center == rhs.center && Equals(r ,rhs.r);
 	}
 }

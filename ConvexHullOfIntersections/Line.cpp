@@ -1,7 +1,8 @@
 #include "Line.h"
 #include "Constants.h"
-#include <algorithm>
 #include "Helper.h"
+
+#include <algorithm>
 
 namespace ConvexHull
 {
@@ -21,7 +22,7 @@ namespace ConvexHull
 
 		double common_denominator = Determinant(x1_minus_x2, y1_minus_y2, x3_minus_x4, y3_minus_y4);
 
-		if (Point::Equals(common_denominator, 0.0))
+		if (Equals(common_denominator, 0.0))
 			return false;
 
 		intersection.x = round_4_decimal(x_numerator / common_denominator);

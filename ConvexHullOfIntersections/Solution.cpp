@@ -1,10 +1,10 @@
 #include "Solution.h"
+#include "Helper.h"
+
 #include <string>
 #include <sstream>
 #include <iostream>
 #include <iomanip>
-#include "Helper.h"
-#include <chrono>
 
 namespace ConvexHull
 {
@@ -38,7 +38,7 @@ namespace ConvexHull
 			if (shapes_count > 0 && shapes_count <= 1000)
 			{
 				std::getline(input, sline);
-				for (int i = 0; i < shapes_count; i++)
+				for (int i = 0; i < shapes_count; ++i)
 				{
 					std::getline(input, sline);
 					std::stringstream linestream(sline);
@@ -75,7 +75,7 @@ namespace ConvexHull
 		if (!check_file_inters.empty())
 		{
 			std::getline(expected_input, sline);
-			for (int i = 0; i < 15; i++)
+			for (int i = 0; i < 15; ++i)
 			{
 				std::getline(expected_input, sline);
 				std::stringstream linestream(sline);
@@ -88,7 +88,7 @@ namespace ConvexHull
 		if (!check_file_convhull.empty())
 		{
 			std::getline(expected_hull_input, sline);
-			for (int i = 0; i < 9; i++)
+			for (int i = 0; i < 9; ++i)
 			{
 				std::getline(expected_hull_input, sline);
 				std::stringstream linestream(sline);
@@ -102,32 +102,32 @@ namespace ConvexHull
 
 	void Solution::GetIntersectionPoints()
 	{
-		for (unsigned i = 0; i < lines.size(); i++)
+		for (size_t i = 0; i < lines.size(); ++i)
 		{
 			if (i + 1 < lines.size())
 			{
-				for (unsigned j = i + 1; j < lines.size(); j++)
+				for (size_t j = i + 1; j < lines.size(); ++j)
 				{
-					Point new_point(0, 0);
+					Point new_point;
 					if (lines[i].GetLineLineIntersectionPoint(lines[j], new_point))
 						points.push_back(new_point);
 				}
 			}
 		}
-		for (unsigned i = 0; i < circles.size(); i++)
+		for (size_t i = 0; i < circles.size(); ++i)
 		{
 			if (i + 1 < circles.size())
 			{
-				for (unsigned j = i + 1; j < circles.size(); j++)
+				for (size_t j = i + 1; j < circles.size(); ++j)
 				{
 					std::vector<Point> new_points = circles[i].GetCircleCircleIntersectionPoints(circles[j]);
 					points.insert(points.end(), new_points.begin(), new_points.end());
 				}
 			}
 		}
-		for (auto circle : circles)
+		for (const auto& circle : circles)
 		{
-			for (auto line : lines)
+			for (const auto& line : lines)
 			{
 				std::vector<Point> new_points = circle.GetCircleLineIntersectionPoints(line);
 				points.insert(points.end(), new_points.begin(), new_points.end());
@@ -140,7 +140,7 @@ namespace ConvexHull
 	void Solution::CheckIntersectionPoints()
 	{
 		std::vector<Point> not_found;
-		for (auto i : points)
+		for (const auto& i : points)
 		{
 			Point tmp(round_4_decimal(i.x), round_4_decimal(i.y));
 			std::cout << tmp.x << " " << tmp.y << std::endl;
@@ -157,10 +157,10 @@ namespace ConvexHull
 		if ((!expected_points.empty() || !not_found.empty()) && !points.empty())
 		{
 			std::cout << std::endl << "missed:" << std::endl;
-			for (auto i : expected_points)
+			for (const auto& i : expected_points)
 				std::cout << std::setprecision(5) << i.x << " " << i.y << std::endl;
 			std::cout << "extra:" << std::endl;
-			for (auto i : not_found)
+			for (const auto& i : not_found)
 				std::cout << std::setprecision(5) << i.x << " " << i.y << std::endl;
 		}
 	}
@@ -187,10 +187,10 @@ namespace ConvexHull
 		if ((!expected_convex_points.empty() || !not_found_convex.empty()) && !convex_hull_points.empty())
 		{
 			std::cout << std::endl << "missed:" << std::endl;
-			for (auto i : expected_convex_points)
+			for (const auto& i : expected_convex_points)
 				std::cout << std::setprecision(5) << i.x << " " << i.y << std::endl;
 			std::cout << "extra:" << std::endl;
-			for (auto i : not_found_convex)
+			for (const auto& i : not_found_convex)
 				std::cout << std::setprecision(5) << i.x << " " << i.y << std::endl;
 		}
 	}
@@ -202,7 +202,7 @@ namespace ConvexHull
 		if (shapes_count > 0 && shapes_count <= 1000)
 		{
 			std::getline(std::cin, sline);
-			for (int i = 0; i < shapes_count; i++)
+			for (int i = 0; i < shapes_count; ++i)
 			{
 				std::getline(std::cin, sline);
 				std::stringstream linestream(sline);
@@ -238,7 +238,7 @@ namespace ConvexHull
 
 	void Solution::CalculateConvexHull() 
 	{
-		Polygon p(points);
+		PointCloud p(points);
 
 		convex_hull_points = p.GetConvexHull();
 		std::cout << convex_hull_points.size() << std::endl;

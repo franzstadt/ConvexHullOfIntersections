@@ -2,11 +2,10 @@
 #include "Point.h"
 #include "Line.h"
 #include "Circle.h"
-#include "Polygon.h"
+#include "PointCloud.h"
+
 #include <fstream>
-#include <unordered_set>
-#include <unordered_map>
-#include <set>
+
 namespace ConvexHull
 {
 	class Solution
