@@ -18,4 +18,8 @@ namespace ConvexHull
 	{
 		return Equals(x, rhs.x) && Equals(y, rhs.y);
 	}
+	bool Point::operator<(const Point & rhs) const
+	{
+		return x < rhs.x || (Equals(x, rhs.x) && y < rhs.y);
+	}
 }

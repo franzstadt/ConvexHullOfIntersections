@@ -105,28 +105,34 @@ namespace ConvexHull
 		for (unsigned i = 0; i < lines.size(); i++)
 		{
 			if (i + 1 < lines.size())
+			{
 				for (unsigned j = i + 1; j < lines.size(); j++)
 				{
 					Point new_point(0, 0);
-					if (lines[i].GetLineLineIntersectionPoints(lines[j], new_point))
+					if (lines[i].GetLineLineIntersectionPoint(lines[j], new_point))
 						points.push_back(new_point);
 				}
+			}
 		}
 		for (unsigned i = 0; i < circles.size(); i++)
 		{
 			if (i + 1 < circles.size())
+			{
 				for (unsigned j = i + 1; j < circles.size(); j++)
 				{
 					std::vector<Point> new_points = circles[i].GetCircleCircleIntersectionPoints(circles[j]);
-					points.insert(points.end(),new_points.begin(), new_points.end());
+					points.insert(points.end(), new_points.begin(), new_points.end());
 				}
+			}
 		}
 		for (auto circle : circles)
+		{
 			for (auto line : lines)
 			{
 				std::vector<Point> new_points = circle.GetCircleLineIntersectionPoints(line);
-				points.insert(points.end(),new_points.begin(), new_points.end());
+				points.insert(points.end(), new_points.begin(), new_points.end());
 			}
+		}
 		std::cout << points.size() << std::endl;
 		CheckIntersectionPoints();
 	}
@@ -140,7 +146,7 @@ namespace ConvexHull
 			std::cout << tmp.x << " " << tmp.y << std::endl;
 			if (!expected_points.empty())
 			{
-				Point tmp(round(i.x * 10000) / 10000, round(i.y * 10000) / 10000);
+				Point tmp(round_4_decimal(i.x), round_4_decimal(i.y));
 				auto it = find(expected_points.begin(), expected_points.end(), tmp);
 				if (it != expected_points.end())
 					expected_points.erase(it);

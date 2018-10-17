@@ -5,7 +5,7 @@
 
 namespace ConvexHull
 {
-	bool Line::GetLineLineIntersectionPoints(const Line & l2, Point & intersection) const
+	bool Line::GetLineLineIntersectionPoint(const Line & l2, Point & intersection) const
 	{
 		double determinant_l1 = Determinant(p1.x, p1.y, p2.x, p2.y);
 		double determinant_l2 = Determinant(l2.p1.x, l2.p1.y, l2.p2.x, l2.p2.y);
@@ -33,7 +33,7 @@ namespace ConvexHull
 		return true;
 	}
 
-	inline bool Line::OnLine(const Point & c) const// TODO: Review
+	inline bool Line::OnLine(const Point & c) const
 	{
 		return c.x <= std::max(p1.x, p2.x) && c.x >= std::min(p1.x, p2.x) && c.y <= std::max(p1.y, p2.y) && c.y >= std::min(p1.y, p2.y); 
 	}

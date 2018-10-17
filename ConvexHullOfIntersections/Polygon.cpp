@@ -11,7 +11,9 @@ namespace ConvexHull
 
 	std::vector<Point> Polygon::GetConvexHull()
 	{
-		size_t n = m_points.size(), k = 0;
+		size_t n = m_points.size(),
+			   k = 0;
+
 		if (n <= 3) 
 			return m_points;
 		
@@ -41,14 +43,14 @@ namespace ConvexHull
 		return convex_hull;
 	}
 
-	double Polygon::GetConvexHullArea(const std::vector<Point>& hull) const
+	double Polygon::GetConvexHullArea(const std::vector<Point>& convex_hull) const
 	{
 		double area = 0.0;
-		size_t j = hull.size() - 1;
+		size_t j = convex_hull.size() - 1;
 
-		for (unsigned i = 0; i < hull.size(); i++)
+		for (unsigned i = 0; i < convex_hull.size(); i++)
 		{
-			area += (hull[j].x + hull[i].x) * (hull[j].y - hull[i].y);
+			area += (convex_hull[j].x + convex_hull[i].x) * (convex_hull[j].y - convex_hull[i].y);
 			j = i;
 		}
 		return abs(area / 2.0);

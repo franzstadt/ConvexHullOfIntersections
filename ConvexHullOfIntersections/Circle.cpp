@@ -54,7 +54,7 @@ namespace ConvexHull
 		double dx = x2 - x1;
 		double dy = y2 - y1;
 
-		double sign_dy = dy < 0.0 ? -1.0 : 1.0; // TODO:refacor
+		double sign_dy = dy < 0.0 ? -1.0 : 1.0; 
 
 		double dr_pow_2 = dx * dx + dy * dy;
 
