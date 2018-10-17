@@ -23,4 +23,9 @@ namespace ConvexHull
 	{
 		return x < rhs.x || (Equals(x, rhs.x) && y < rhs.y);
 	}
+
+	double Point::Cross(const Point &x, const Point &a, const Point &b)
+	{
+		return (a.x - x.x) * (b.y - x.y) - (a.y - x.y) * (b.x - x.x);
+	}
 }

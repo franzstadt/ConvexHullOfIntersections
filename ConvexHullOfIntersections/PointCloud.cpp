@@ -4,11 +4,6 @@
 
 namespace ConvexHull
 {
-	double PointCloud::Cross(const Point &x, const Point &a, const Point &b) const
-	{
-		return (a.x - x.x) * (b.y - x.y) - (a.y - x.y) * (b.x - x.x);
-	}
-
 	std::vector<Point> PointCloud::GetConvexHull()
 	{
 		size_t n = m_points.size(), k = 0;
@@ -22,7 +17,7 @@ namespace ConvexHull
 
 		for (size_t i = 0; i < n; ++i) 
 		{
-			while (k >= 2 && Cross(convex_hull[k - 2], convex_hull[k - 1], m_points[i]) <= 0)
+			while (k >= 2 && Point::Cross(convex_hull[k - 2], convex_hull[k - 1], m_points[i]) <= 0)
 			{
 				k--;
 			}
@@ -31,7 +26,7 @@ namespace ConvexHull
 
 		for (size_t i = n - 1, t = k + 1; i > 0; --i) 
 		{
-			while (k >= t && Cross(convex_hull[k - 2], convex_hull[k - 1], m_points[i - 1]) <= 0) 
+			while (k >= t && Point::Cross(convex_hull[k - 2], convex_hull[k - 1], m_points[i - 1]) <= 0) 
 			{
 				k--; 
 			}

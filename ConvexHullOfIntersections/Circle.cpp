@@ -13,9 +13,12 @@ namespace ConvexHull
 		if ((d > r + c.r) || d < abs(r - c.r))
 			return intersection_points;
 
-		double r1s_minus_r2s_squared = ((r*r) - (c.r*c.r))*((r*r) - (c.r*c.r));
-		double r1s_plus_r2s = (r*r) + (c.r*c.r);
-		double r1s_minus_r2s = (r*r) - (c.r*c.r);
+		double r_squared = r * r;
+		double cr_squared = c.r * c.r;
+
+		double r1s_minus_r2s_squared = ((r_squared) - (cr_squared))*((r_squared) - (cr_squared));
+		double r1s_plus_r2s = (r_squared) + (cr_squared);
+		double r1s_minus_r2s = (r_squared) - (cr_squared);
 		double x1_x2_squared = (center.x*center.x) - (c.center.x*c.center.x);
 		double y1_y2_squared = (center.y*center.y) - (c.center.y*c.center.y);
 		double x2_m_x1 = (c.center.x - center.x);
@@ -23,13 +26,15 @@ namespace ConvexHull
 		double y1_p_y2 = (center.y + c.center.y);
 		double y2_m_y1 = (c.center.y - center.y);
 
-		double det = ((2.0 * r1s_plus_r2s) / (d*d)) - ((r1s_minus_r2s_squared) / (d*d*d*d)) - 1.0;
+		double d_squared = d * d;
+
+		double det = ((2.0 * r1s_plus_r2s) / (d*d)) - ((r1s_minus_r2s_squared) / (d_squared*d_squared)) - 1.0;
 		double D = det < 0.0 ? 0.0 : sqrt(det) / 2.0;
 
-		double x1 = (x1_p_x2 / 2.0) + (r1s_minus_r2s / (2.0 * d*d))*x2_m_x1 + (D*y2_m_y1);
-		double x2 = (x1_p_x2 / 2.0) + (r1s_minus_r2s / (2.0 * d*d))*x2_m_x1 - (D*y2_m_y1);
-		double y1 = (y1_p_y2 / 2.0) + (r1s_minus_r2s / (2.0 * d*d))*y2_m_y1 - (D*x2_m_x1);
-		double y2 = (y1_p_y2 / 2.0) + (r1s_minus_r2s / (2.0 * d*d))*y2_m_y1 + (D*x2_m_x1);
+		double x1 = (x1_p_x2 / 2.0) + (r1s_minus_r2s / (2.0 * d_squared))*x2_m_x1 + (D*y2_m_y1);
+		double x2 = (x1_p_x2 / 2.0) + (r1s_minus_r2s / (2.0 * d_squared))*x2_m_x1 - (D*y2_m_y1);
+		double y1 = (y1_p_y2 / 2.0) + (r1s_minus_r2s / (2.0 * d_squared))*y2_m_y1 - (D*x2_m_x1);
+		double y2 = (y1_p_y2 / 2.0) + (r1s_minus_r2s / (2.0 * d_squared))*y2_m_y1 + (D*x2_m_x1);
 
 		intersection_points.push_back(Point(x1, y1));
 
@@ -61,7 +66,7 @@ namespace ConvexHull
 		double common_determinant = Determinant(x1, x2, y1, y2);
 
 		double discriminant = r * r*dr_pow_2 - common_determinant * common_determinant;
-		double sqrt_disc = sqrt(discriminant);
+		double sqrt_disc = std::sqrt(discriminant);
 
 		if (discriminant < 0.0)
 			return intersection_points;

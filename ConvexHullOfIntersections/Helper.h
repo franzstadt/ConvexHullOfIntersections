@@ -21,14 +21,4 @@ namespace ConvexHull
 	{
 		return std::abs(a - b) <= std::numeric_limits<double>::epsilon() * std::abs(a + b) * 4.0 || std::abs(a - b) < std::numeric_limits<double>::min();
 	}
-
-	inline bool LE(double a, double b)
-	{
-		return a < b || Equals(a, b);
-	}
-
-	inline bool GE(double a, double b)
-	{
-		return a > b || Equals(a, b);
-	}
  }

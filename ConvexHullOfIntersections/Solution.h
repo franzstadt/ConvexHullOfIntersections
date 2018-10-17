@@ -10,11 +10,6 @@ namespace ConvexHull
 {
 	class Solution
 	{
-	public:
-		Solution(std::string input_file_name = "");
-		void ReadInput();
-		void GetIntersectionPoints();
-		void CalculateConvexHull();
 	private:
 		std::string m_input_file_name;
 
@@ -27,6 +22,13 @@ namespace ConvexHull
 		std::vector<Point> points;
 		std::vector<Point> convex_hull_points;
 		void ReadStream(std::istream& input);
+
+	public:
+		Solution(std::string input_file_name = "");
+		void ReadInput();
+		void GetIntersectionPoints();
+		void CalculateConvexHull();
+	
 	};
 
 }

@@ -14,59 +14,57 @@ namespace ConvexHull
 
 	void Solution::ReadStream(std::istream& input)
 	{
-		if(!(input >> shapes_count))
+		if (!(input >> shapes_count))
 			throw std::runtime_error("Invalid shape count.");
 
-		if (shapes_count > 0 && shapes_count <= 1000)
-		{
-			std::string line;
-			std::getline(input, line);
-			for (int i = 0; i < shapes_count; ++i)
-			{
-				std::getline(input, line);
-				std::stringstream linestream(line);
-				char type_of_shape;
-				if(!(linestream >> type_of_shape))
-					throw std::runtime_error("Invalid shape type.");
-
-				switch (type_of_shape)
-				{
-					case 'C':
-					{
-						double x, y, radius;
-
-						if (linestream >> x >> y >> radius)
-						{
-							Circle c(x, y, radius);
-							circles.push_back(c);
-						}
-						else
-							throw std::runtime_error("Invalid circle.");
-
-						break;
-					}
-					case 'L':
-					{
-						double x1, y1, x2, y2;
-
-						if(linestream >> x1 >> y1 >> x2 >> y2)
-						{ 
-							Point a(x1, y1), b(x2, y2);
-							Line l(a, b);
-							lines.push_back(l);
-						}
-						else
-							throw std::runtime_error("Invalid circle.");
-
-						break;
-					}
-					default: throw std::runtime_error("Bad shape type.");
-				}
-			}
-			m_input_loaded = true;
-		}
-		else
+		if (shapes_count < 0 || shapes_count > 1000)
 			throw std::runtime_error("The number of shapes must be between 0 and 1000.");
+
+		std::string line;
+		std::getline(input, line);
+		for (int i = 0; i < shapes_count; ++i)
+		{
+			std::getline(input, line);
+			std::stringstream linestream(line);
+			char type_of_shape;
+			if (!(linestream >> type_of_shape))
+				throw std::runtime_error("Invalid shape type.");
+
+			switch (type_of_shape)
+			{
+				case 'C':
+				{
+					double x, y, radius;
+
+					if (linestream >> x >> y >> radius)
+					{
+						Circle c(x, y, radius);
+						circles.push_back(c);
+					}
+					else
+						throw std::runtime_error("Invalid circle.");
+
+					break;
+				}
+				case 'L':
+				{
+					double x1, y1, x2, y2;
+
+					if (linestream >> x1 >> y1 >> x2 >> y2)
+					{
+						Point a(x1, y1), b(x2, y2);
+						Line l(a, b);
+						lines.push_back(l);
+					}
+					else
+						throw std::runtime_error("Invalid circle.");
+
+					break;
+				}
+				default: throw std::runtime_error("Bad shape type.");
+			}
+		}
+		m_input_loaded = true;
 	}
 
 	void Solution::GetIntersectionPoints()

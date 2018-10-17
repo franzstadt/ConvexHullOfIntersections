@@ -36,7 +36,10 @@ namespace ConvexHull
 
 	inline bool Line::OnLine(const Point & c) const
 	{
-		return islessequal(c.x, std::max(p1.x, p2.x)) && isgreaterequal(c.x, std::min(p1.x, p2.x)) && islessequal(c.y, std::max(p1.y, p2.y)) && isgreaterequal(c.y, std::min(p1.y, p2.y));
+		return std::islessequal(c.x, std::max(p1.x, p2.x)) && 
+			   std::isgreaterequal(c.x, std::min(p1.x, p2.x)) && 
+			   std::islessequal(c.y, std::max(p1.y, p2.y)) && 
+			   std::isgreaterequal(c.y, std::min(p1.y, p2.y));
 	}
 
 	bool Line::operator==(const Line& rhs) const
