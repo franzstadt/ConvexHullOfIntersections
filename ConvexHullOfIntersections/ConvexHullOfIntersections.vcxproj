@@ -133,8 +133,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="expected_convex_hull_points0.txt" />
+    <Text Include="expected_convex_hull_points1.txt" />
     <Text Include="expected_intersection_points0.txt" />
+    <Text Include="expected_intersection_points1.txt" />
     <Text Include="input0.txt" />
+    <Text Include="input1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

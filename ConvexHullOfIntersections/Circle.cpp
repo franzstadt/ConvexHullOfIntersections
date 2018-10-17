@@ -23,17 +23,17 @@ namespace ConvexHull
 		double y1_p_y2 = (center.y + c.center.y);
 		double y2_m_y1 = (c.center.y - center.y);
 
-		double det = ((2 * r1s_plus_r2s) / (d*d)) - ((r1s_minus_r2s_squared) / (d*d*d*d)) - 1;
-		double D = det < 0 ? 0 : sqrt(det) / 2;
+		double det = ((2.0 * r1s_plus_r2s) / (d*d)) - ((r1s_minus_r2s_squared) / (d*d*d*d)) - 1.0;
+		double D = det < 0.0 ? 0.0 : sqrt(det) / 2.0;
 
-		double x1 = (x1_p_x2 / 2) + (r1s_minus_r2s / (2 * d*d))*x2_m_x1 + (D*y2_m_y1);
-		double x2 = (x1_p_x2 / 2) + (r1s_minus_r2s / (2 * d*d))*x2_m_x1 - (D*y2_m_y1);
-		double y1 = (y1_p_y2 / 2) + (r1s_minus_r2s / (2 * d*d))*y2_m_y1 - (D*x2_m_x1);
-		double y2 = (y1_p_y2 / 2) + (r1s_minus_r2s / (2 * d*d))*y2_m_y1 + (D*x2_m_x1);
+		double x1 = (x1_p_x2 / 2.0) + (r1s_minus_r2s / (2.0 * d*d))*x2_m_x1 + (D*y2_m_y1);
+		double x2 = (x1_p_x2 / 2.0) + (r1s_minus_r2s / (2.0 * d*d))*x2_m_x1 - (D*y2_m_y1);
+		double y1 = (y1_p_y2 / 2.0) + (r1s_minus_r2s / (2.0 * d*d))*y2_m_y1 - (D*x2_m_x1);
+		double y2 = (y1_p_y2 / 2.0) + (r1s_minus_r2s / (2.0 * d*d))*y2_m_y1 + (D*x2_m_x1);
 
 		intersection_points.push_back(Point(x1, y1));
 
-		if (d == abs(r - c.r) || d == (r + c.r))
+		if (Equals(d, abs(r - c.r)) || Equals(d, (r + c.r)))
 			return intersection_points;
 
 		intersection_points.push_back(Point(x2, y2));
@@ -63,7 +63,7 @@ namespace ConvexHull
 		double discriminant = r * r*dr_pow_2 - common_determinant * common_determinant;
 		double sqrt_disc = sqrt(discriminant);
 
-		if (discriminant < 0)
+		if (discriminant < 0.0)
 			return intersection_points;
 
 		double intersection_x1 = (common_determinant*dy + sign_dy * dx*sqrt_disc) / dr_pow_2;

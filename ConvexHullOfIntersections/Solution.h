@@ -11,27 +11,22 @@ namespace ConvexHull
 	class Solution
 	{
 	public:
-		Solution(std::string input_file_name = "", std::string check_file_inters = "", std::string check_file_convhull = "");
+		Solution(std::string input_file_name = "");
+		void ReadInput();
 		void GetIntersectionPoints();
 		void CalculateConvexHull();
-		~Solution();
 	private:
+		std::string m_input_file_name;
+
+		bool m_input_loaded;
+		bool m_intersection_points_calculated;
 		int shapes_count;
+
 		std::vector<Circle> circles;
 		std::vector<Line> lines;
 		std::vector<Point> points;
-		std::vector<Point> expected_points;
-		std::vector<Point> expected_convex_points;
-		std::ifstream input;
-		std::ifstream expected_input;
-		std::ifstream expected_hull_input;
-		std::string sline;
 		std::vector<Point> convex_hull_points;
-		std::vector<Point> not_found_convex;
-		std::vector<Point> area;
-		void CheckIntersectionPoints();
-		void CheckConvexHullPoints();
-		void ReadFromCin();
+		void ReadStream(std::istream& input);
 	};
 
 }

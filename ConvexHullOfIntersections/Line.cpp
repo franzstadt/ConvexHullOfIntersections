@@ -25,8 +25,8 @@ namespace ConvexHull
 		if (Equals(common_denominator, 0.0))
 			return false;
 
-		intersection.x = round_4_decimal(x_numerator / common_denominator);
-		intersection.y = round_4_decimal(y_numerator / common_denominator);
+		intersection.x = x_numerator / common_denominator;//round_4_decimal(x_numerator / common_denominator);
+		intersection.y = y_numerator / common_denominator;//round_4_decimal(y_numerator / common_denominator);
 
 		if (!isfinite(intersection.x) || !isfinite(intersection.y) || !OnLine(intersection) || !l2.OnLine(intersection))
 			return false;
@@ -36,7 +36,7 @@ namespace ConvexHull
 
 	inline bool Line::OnLine(const Point & c) const
 	{
-		return c.x <= std::max(p1.x, p2.x) && c.x >= std::min(p1.x, p2.x) && c.y <= std::max(p1.y, p2.y) && c.y >= std::min(p1.y, p2.y); 
+		return islessequal(c.x, std::max(p1.x, p2.x)) && isgreaterequal(c.x, std::min(p1.x, p2.x)) && islessequal(c.y, std::max(p1.y, p2.y)) && isgreaterequal(c.y, std::min(p1.y, p2.y));
 	}
 
 	bool Line::operator==(const Line& rhs) const
